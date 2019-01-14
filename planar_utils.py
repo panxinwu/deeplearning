@@ -35,24 +35,28 @@ def sigmoid(x):
     return s
  
 def load_planar_dataset():
-    np.random.seed(1)
-    m = 400 # number of examples
-    N = int(m/2) # number of points per class
-    D = 2 # dimensionality
-    X = np.zeros((m,D)) # data matrix where each row is a single example
-    Y = np.zeros((m,1), dtype='uint8') # labels vector (0 for red, 1 for blue)
-    a = 4 # maximum ray of the flower
+    # np.random.seed(1)
+    # m = 400 # number of examples
+    # N = int(m/2) # number of points per class
+    # D = 2 # dimensionality
+    # X = np.zeros((m,D)) # data matrix where each row is a single example
+    # Y = np.zeros((m,1), dtype='uint8') # labels vector (0 for red, 1 for blue)
+    # a = 4 # maximum ray of the flower
  
-    for j in range(2):
-        ix = range(N*j,N*(j+1))
-        t = np.linspace(j*3.12,(j+1)*3.12,N) + np.random.randn(N)*0.2 # theta
-        r = a*np.sin(4*t) + np.random.randn(N)*0.2 # radius
-        X[ix] = np.c_[r*np.sin(t), r*np.cos(t)]
-        Y[ix] = j
+    # for j in range(2):
+    #     ix = range(N*j,N*(j+1))
+    #     t = np.linspace(j*3.12,(j+1)*3.12,N) + np.random.randn(N)*0.2 # theta
+    #     r = a*np.sin(4*t) + np.random.randn(N)*0.2 # radius
+    #     X[ix] = np.c_[r*np.sin(t), r*np.cos(t)]
+    #     Y[ix] = j
          
-    X = X.T
-    Y = Y.T
- 
+    # X = X.T
+    # Y = Y.T
+    X = np.array([[56, 4, 2, 1, 0, 0, 0, 2, 5, 1, 261, 1, 999, 0, 3, 1.1, 93.994, -36.4, 4.857, 5191],
+    [57, 8, 2, 4, 2, 0, 0, 2, 5, 1, 149, 1, 999, 0, 3, 1.1, 93.994, -36.4, 4.857, 5191],
+    [37, 8, 2, 4, 0, 1, 0, 2, 5, 1, 226, 1, 999, 0, 3, 1.1, 93.994, -36.4, 4.857, 5191],
+    [37, 2, 1, 3, 2, 1, 0, 2, 5, 3, 591, 1, 999, 0, 3, 1.1, 93.994, -36.4, 4.856, 5191]])
+    Y = np.array([[0, 0, 0, 1]])
     return X, Y
  
 def load_extra_datasets():  
@@ -64,3 +68,21 @@ def load_extra_datasets():
     no_structure = np.random.rand(N, 2), np.random.rand(N, 2)
      
     return noisy_circles, noisy_moons, blobs, gaussian_quantiles, no_structure
+
+def layer_sizes(X, Y):
+    """
+    Arguments:
+    X -- input dataset of shape (input size, number of examples)
+    Y -- labels of shape (output size, number of examples)
+
+    Returns:
+    n_x -- the size of the input layer
+    n_h -- the size of the hidden layer
+    n_y -- the size of the output layer
+    """
+    ### START CODE HERE ### (≈ 3 lines of code)
+    n_x = X.shape[1] # size of input layer
+    n_h = 2
+    n_y = Y.shape[0]# size of output layer
+    ### END CODE HERE ###
+    return (n_x, n_h, n_y)
