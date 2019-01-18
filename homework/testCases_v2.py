@@ -7,7 +7,7 @@ def layer_sizes_test_case():
     return X_assess, Y_assess
 
 def initialize_parameters_test_case():
-    n_x, n_h, n_y = 20, 15, 1
+    n_x, n_h, n_y = 2, 4, 1
     return n_x, n_h, n_y
 
 
