@@ -9,6 +9,7 @@ from planar_utils import plot_decision_boundary, sigmoid, load_planar_dataset, l
 from readFile import read_csv
 
 def initialize_parameters(n_x, n_h, n_y):
+    np.random.seed(1)
     W1 = np.random.randn(n_h, n_x)
     b1 = np.zeros((n_h, 1))
     W2 = np.random.randn(n_y, n_h)
@@ -32,6 +33,7 @@ def forward_propagation(X, parameters):
     b2 = parameters["b2"]
     Z1 = np.dot(W1, X) + b1
     A1 = np.tanh(Z1)
+    # A1 = sigmoid(Z1)
     Z2 = np.dot(W2, A1) + b2 
     A2 = sigmoid(Z2)
     assert(A2.shape == (1, X.shape[1]))
@@ -45,30 +47,11 @@ def forward_propagation(X, parameters):
 
 
 def compute_cost(A2, Y, parameters):
-    """
-    Computes the cross-entropy cost given in equation (13)
-
-    Arguments:
-    A2 -- The sigmoid output of the second activation, of shape (1, number of examples)
-    Y -- "true" labels vector of shape (1, number of examples)
-    parameters -- python dictionary containing your parameters W1, b1, W2 and b2
-
-    Returns:
-    cost -- cross-entropy cost given equation (13)
-    """
-
     m = Y.shape[1] # number of example
-
-    # Compute the cross-entropy cost
-    ### START CODE HERE ### (≈ 2 lines of code)
     logprobs = np.multiply(np.log(A2), Y) + np.multiply(np.log(1-A2), (1-Y))
     cost = -(1.0/m)*np.sum(logprobs)
-    ### END CODE HERE ###
-
     cost = np.squeeze(cost)     # makes sure cost is the dimension we expect. 
-                                # E.g., turns [[17]] into 17 
     assert(isinstance(cost, float))
-
     return cost
 
 def backward_propagation(parameters, cache, X, Y):
@@ -82,6 +65,7 @@ def backward_propagation(parameters, cache, X, Y):
     dW2 = 1.0/m*np.dot(dZ2, A1.T)
     db2 = 1.0/m*np.sum(dZ2, axis=1, keepdims=True)
     dZ1 = np.dot(W2.T, dZ2)*(1-np.power(A1, 2))
+    # dZ1 = np.dot(W2.T, dZ2)*A1*(1-A1)
     dW1 = 1.0/m*np.dot(dZ1, X.T)
     db1 = 1.0/m*np.sum(dZ1, axis=1, keepdims=True)
     grads = {"dW1": dW1,
@@ -115,7 +99,7 @@ def update_parameters(parameters, grads, learning_rate = 1.2):
 
 def nn_model(X, Y, n_h, num_iterations = 10000, print_cost=False):
     n_x = X.shape[0]
-    n_h = 15
+    n_h = 5
     n_y = Y.shape[0]
     print('n_x', n_x)
     print('n_y', n_y)
@@ -132,43 +116,23 @@ def nn_model(X, Y, n_h, num_iterations = 10000, print_cost=False):
 
 def predict(parameters, X):
     A2, cache = forward_propagation(X, parameters)
-    predictions = 1.0*(A2 > 0.5)
+    print(A2.shape)
+    dataframe = pd.DataFrame({'A2': A2.tolist()[0]})
+    dataframe.to_csv("A2.csv",index=False,sep=',')
+
+    predictions = 1.0*(A2 > 0.2)
 
     return predictions
 
 X_assess, Y_assess, X_test_assess, Y_test_assess = read_csv()
+print(Y_test_assess)
 X_assess = np.array(X_assess)
 X_test_assess = np.array(X_test_assess)
 Y_assess = np.array(Y_assess)
 Y_test_assess = np.array(Y_test_assess)
-print('XXXXX', X_test_assess.shape)
-print('YYYY', Y_test_assess.shape)
 parameters = nn_model(X_assess.T, Y_assess.T, 15, num_iterations=10000, print_cost=True)
-print("W1 = " + str(parameters["W1"]))
-print("b1 = " + str(parameters["b1"]))
-print("W2 = " + str(parameters["W2"]))
-print("b2 = " + str(parameters["b2"]))
-
-
-
-
-
-# parameters, X_assess = predict_test_case()
-
-# predictions = predict(parameters, X_test_assess.T)
-# print("predictions mean = " + str(np.mean(predictions)))
-
-
-# # Build a model with a n_h-dimensional hidden layer
-# parameters = nn_model(X, Y, n_h = 15, num_iterations = 10000, print_cost=True)
-
-# # # Plot the decision boundary
-# plot_decision_boundary(lambda x: predict(parameters, x.T), X, Y)
-# plt.title("Decision Boundary for hidden layer size " + str(4))
-
-# Print accuracy
 predictions = predict(parameters, X_test_assess.T)
-print('Y_test_assess: ', Y_test_assess)
-print('predictions: ',predictions)
-
+# print(predictions.tolist()[0])
+dataframe = pd.DataFrame({'predictions': predictions.tolist()[0]})
+dataframe.to_csv("test.csv",index=False,sep=',')
 print ('Accuracy: %d' % float((np.dot(Y_test_assess.T, predictions.T) + np.dot((1-Y_test_assess).T,(1-predictions).T))/float(Y_test_assess.size)*100) + '%')
