@@ -1,0 +1,10 @@
+Accuracy for 1 hidden units: 69.1551347414421 %
+Accuracy for 2 hidden units: 57.21048798252003 %
+Accuracy for 3 hidden units: 60.87642631706724 %
+Accuracy for 4 hidden units: 68.30541393542123 %
+Accuracy for 5 hidden units: 69.98057781014809 %
+Accuracy for 6 hidden units: 70.84243748482642 %
+Accuracy for 7 hidden units: 70.25977178926924 %
+Accuracy for 8 hidden units: 70.23549405195436 %
+Accuracy for 9 hidden units: 70.32046613255645 %
+Accuracy for 10 hidden units: 70.13838310269482 %

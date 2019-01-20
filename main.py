@@ -1,12 +1,9 @@
-# Package imports
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import sklearn
-import sklearn.datasets
-import sklearn.linear_model
-from planar_utils import plot_decision_boundary, sigmoid, load_planar_dataset, load_extra_datasets, layer_sizes
+from sklearn import preprocessing
+from planar_utils import sigmoid
 from readFile import read_csv
+min_max_scaler = preprocessing.MinMaxScaler()
 
 def initialize_parameters(n_x, n_h, n_y):
     np.random.seed(1)
@@ -99,7 +96,6 @@ def update_parameters(parameters, grads, learning_rate = 1.2):
 
 def nn_model(X, Y, n_h, num_iterations = 10000, print_cost=False):
     n_x = X.shape[0]
-    n_h = 5
     n_y = Y.shape[0]
     print('n_x', n_x)
     print('n_y', n_y)
@@ -116,23 +112,44 @@ def nn_model(X, Y, n_h, num_iterations = 10000, print_cost=False):
 
 def predict(parameters, X):
     A2, cache = forward_propagation(X, parameters)
-    print(A2.shape)
     dataframe = pd.DataFrame({'A2': A2.tolist()[0]})
     dataframe.to_csv("A2.csv",index=False,sep=',')
 
-    predictions = 1.0*(A2 > 0.2)
+    predictions = 1.0*(A2 > 0.5)
 
     return predictions
 
+# 读取训练数据和预测数据
 X_assess, Y_assess, X_test_assess, Y_test_assess = read_csv()
-print(Y_test_assess)
+
+# 数据归一化
 X_assess = np.array(X_assess)
+X_assess_minmax = min_max_scaler.fit_transform(X_assess)
 X_test_assess = np.array(X_test_assess)
+X_test_assess_minmax = min_max_scaler.fit_transform(X_test_assess)
 Y_assess = np.array(Y_assess)
 Y_test_assess = np.array(Y_test_assess)
-parameters = nn_model(X_assess.T, Y_assess.T, 15, num_iterations=10000, print_cost=True)
-predictions = predict(parameters, X_test_assess.T)
+
+print('X_assess_minmax', X_assess_minmax)
+print('X_test_assess_minmax', X_test_assess_minmax)
+# 模型训练开始
+# parameters = nn_model(X_assess_minmax.T, Y_assess.T, 1, num_iterations=3000, print_cost=True)
+# predictions = predict(parameters, X_test_assess_minmax.T)
 # print(predictions.tolist()[0])
-dataframe = pd.DataFrame({'predictions': predictions.tolist()[0]})
-dataframe.to_csv("test.csv",index=False,sep=',')
-print ('Accuracy: %d' % float((np.dot(Y_test_assess.T, predictions.T) + np.dot((1-Y_test_assess).T,(1-predictions).T))/float(Y_test_assess.size)*100) + '%')
+# dataframe = pd.DataFrame({'predictions': predictions.tolist()[0]})
+# dataframe.to_csv("test.csv",index=False,sep=',')
+# print(float((np.dot(Y_test_assess.T, predictions.T) + np.dot((1-Y_test_assess).T, (1-predictions).T)))
+# finalResult = (np.dot(Y_test_assess.T, predictions.T) + np.dot((1-Y_test_assess).T,(1-predictions).T))/float(Y_test_assess.size)*100
+# print(finalResult[0][0])
+# print ('Accuracy %.2f' % float(finalResult) + '%')
+
+hidden_layer_sizes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 50]
+for i, n_h in enumerate(hidden_layer_sizes):
+    parameters = nn_model(X_assess_minmax.T, Y_assess.T, n_h, num_iterations=5000, print_cost=True)
+    predictions = predict(parameters, X_test_assess_minmax.T)
+    accuracy = float((np.dot(Y_test_assess.T, predictions.T) + np.dot((1-Y_test_assess).T,(1-predictions).T))/float(Y_test_assess.size)*100)
+    print ("Accuracy for {} hidden units: {}%".format(n_h, accuracy))
+    fo = open("result.txt",  mode='a')
+    str = "Accuracy for {} hidden units: {}%".format(n_h, accuracy)
+    fo.write( str )
+    fo.write('\n')

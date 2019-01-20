@@ -1,4 +1,5 @@
 # Package imports
+import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from testCases_v2 import *
@@ -91,6 +92,7 @@ def initialize_parameters(n_x, n_h, n_y):
 # GRADED FUNCTION: forward_propagation
 
 def forward_propagation(X, parameters):
+    print('forward_propagationXXXX', X)
     """
     Argument:
     X -- input data of size (n_x, m)
@@ -117,6 +119,7 @@ def forward_propagation(X, parameters):
     ### END CODE HERE ###
 
     assert(A2.shape == (1, X.shape[1]))
+    # print('forward_propagation', X)
 
     cache = {"Z1": Z1,
              "A1": A1,
@@ -344,44 +347,48 @@ parameters = nn_model(X_assess, Y_assess, 4, num_iterations=10000, print_cost=Tr
 # print("b2 = " + str(parameters["b2"]))
 
 
-# def predict(parameters, X):
-#     """
-#     Using the learned parameters, predicts a class for each example in X
+def predict(parameters, X):
+    """
+    Using the learned parameters, predicts a class for each example in X
 
-#     Arguments:
-#     parameters -- python dictionary containing your parameters 
-#     X -- input data of size (n_x, m)
+    Arguments:
+    parameters -- python dictionary containing your parameters 
+    X -- input data of size (n_x, m)
 
-#     Returns
-#     predictions -- vector of predictions of our model (red: 0 / blue: 1)
-#     """
+    Returns
+    predictions -- vector of predictions of our model (red: 0 / blue: 1)
+    """
 
-#     # Computes probabilities using forward propagation, and classifies to 0/1 using 0.5 as the threshold.
-#     ### START CODE HERE ### (≈ 2 lines of code)
-#     A2, cache = forward_propagation(X, parameters)
-#     predictions = (A2 > 0.5)
-#     ### END CODE HERE ###
+    # Computes probabilities using forward propagation, and classifies to 0/1 using 0.5 as the threshold.
+    ### START CODE HERE ### (≈ 2 lines of code)
+    print(X)
+    A2, cache = forward_propagation(X, parameters)
+    dataframe = pd.DataFrame({'A2': A2.tolist()[0]})
+    dataframe.to_csv("A2.csv",index=False,sep=',')
+    predictions = (A2 > 0.5)
+    ### END CODE HERE ###
 
-#     return predictions
+    return predictions
+
+X_assess, Y_assess = nn_model_test_case()
+parameters = nn_model(X_assess, Y_assess, 4, num_iterations=10000, print_cost=True)
+parameters, X_assess = predict_test_case()
+
+predictions = predict(parameters, X_assess)
+print("predictions mean = " + str(np.mean(predictions)))
 
 
-# parameters, X_assess = predict_test_case()
-
-# predictions = predict(parameters, X_assess)
-# print("predictions mean = " + str(np.mean(predictions)))
-
-
-# # Build a model with a n_h-dimensional hidden layer
-# parameters = nn_model(X, Y, n_h = 4, num_iterations = 10000, print_cost=True)
+# Build a model with a n_h-dimensional hidden layer
+# parameters = nn_model(X_assess, Y, n_h = 4, num_iterations = 10000, print_cost=True)
 
 # # Plot the decision boundary
 # plot_decision_boundary(lambda x: predict(parameters, x.T), X, Y)
 # plt.title("Decision Boundary for hidden layer size " + str(4))
 
-# # Print accuracy
+# Print accuracy
 # predictions = predict(parameters, X)
-# print ('Accuracy: %d' % float((np.dot(Y,predictions.T) + np.dot(1-Y,1-predictions.T))/float(Y.size)*100) + '%')
-# # This may take about 2 minutes to run
+print ('Accuracy: %d' % float((np.dot(Y_assess,predictions.T) + np.dot(1-Y_assess,1-predictions.T))/float(Y_assess.size)*100) + '%')
+# This may take about 2 minutes to run
 
 # plt.figure(figsize=(16, 32))
 # hidden_layer_sizes = [1, 2, 3, 4, 5, 20, 50]

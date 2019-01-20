@@ -13,14 +13,14 @@ def read_csv():
   Y_assess = []
   X_test_assess = []
   Y_test_assess = []
-  for zc_index in range(100):
+  for zc_index in range(inputNum):
       zc_row = zc_dataframe.values[zc_index]
       zc_rowArray = zc_row.tolist()
       tempX_1 = np.delete(zc_row, -1, axis=0)
       X_assess.append(tempX_1.tolist())
       Y_assess.append([zc_rowArray[20]])
 
-  for testIndex in range(100):
+  for testIndex in range(outputNum):
       zc_row = zc_dataframe.values[testIndex + inputNum]
       zc_rowArray = zc_row.tolist()
       tempX_1 = np.delete(zc_row, -1, axis=0)
