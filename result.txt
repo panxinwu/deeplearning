@@ -1,10 +1,51 @@
-Accuracy for 1 hidden units: 69.1551347414421 %
-Accuracy for 2 hidden units: 57.21048798252003 %
-Accuracy for 3 hidden units: 60.87642631706724 %
-Accuracy for 4 hidden units: 68.30541393542123 %
-Accuracy for 5 hidden units: 69.98057781014809 %
-Accuracy for 6 hidden units: 70.84243748482642 %
-Accuracy for 7 hidden units: 70.25977178926924 %
-Accuracy for 8 hidden units: 70.23549405195436 %
-Accuracy for 9 hidden units: 70.32046613255645 %
-Accuracy for 10 hidden units: 70.13838310269482 %
+Accuracy for 0 hidden units: 69.16727361009953%
+Accuracy for 1 hidden units: 69.1551347414421%
+Accuracy for 2 hidden units: 57.21048798252003%
+Accuracy for 3 hidden units: 60.87642631706724%
+Accuracy for 4 hidden units: 68.30541393542123%
+Accuracy for 5 hidden units: 69.98057781014809%
+Accuracy for 6 hidden units: 70.84243748482642%
+Accuracy for 7 hidden units: 70.25977178926924%
+Accuracy for 8 hidden units: 70.23549405195436%
+Accuracy for 9 hidden units: 70.32046613255645%
+Accuracy for 10 hidden units: 70.13838310269482%
+Accuracy for 11 hidden units: 71.07307598931779%
+Accuracy for 12 hidden units: 71.04879825200291%
+Accuracy for 13 hidden units: 71.41296431172614%
+Accuracy for 14 hidden units: 70.42971595047341%
+Accuracy for 15 hidden units: 60.35445496479728%
+Accuracy for 16 hidden units: 70.05341102209273%
+Accuracy for 17 hidden units: 70.28404952658413%
+Accuracy for 18 hidden units: 71.13377033260501%
+Accuracy for 19 hidden units: 69.31294003398884%
+Accuracy for 20 hidden units: 71.71643602816218%
+Accuracy for 21 hidden units: 70.05341102209273%
+Accuracy for 22 hidden units: 70.34474386987132%
+Accuracy for 23 hidden units: 70.41757708181598%
+Accuracy for 24 hidden units: 70.27191065792668%
+Accuracy for 25 hidden units: 70.46613255644574%
+Accuracy for 26 hidden units: 70.5996601116776%
+Accuracy for 27 hidden units: 70.79388201019665%
+Accuracy for 28 hidden units: 68.48749696528283%
+Accuracy for 29 hidden units: 67.81985918912358%
+Accuracy for 30 hidden units: 70.02913328477786%
+Accuracy for 31 hidden units: 70.93954843408594%
+Accuracy for 32 hidden units: 69.93202233551833%
+Accuracy for 33 hidden units: 71.24302015052197%
+Accuracy for 34 hidden units: 69.26438455935907%
+Accuracy for 35 hidden units: 70.25977178926924%
+Accuracy for 36 hidden units: 70.68463219227968%
+Accuracy for 37 hidden units: 71.31585336246661%
+Accuracy for 38 hidden units: 70.44185481913085%
+Accuracy for 39 hidden units: 70.25977178926924%
+Accuracy for 40 hidden units: 70.55110463704783%
+Accuracy for 41 hidden units: 71.37654770575382%
+Accuracy for 42 hidden units: 70.49041029376062%
+Accuracy for 43 hidden units: 70.95168730274338%
+Accuracy for 44 hidden units: 71.63146394756009%
+Accuracy for 45 hidden units: 70.63607671764991%
+Accuracy for 46 hidden units: 70.52682689973294%
+Accuracy for 47 hidden units: 68.51177470259772%
+Accuracy for 48 hidden units: 70.17479970866715%
+Accuracy for 49 hidden units: 70.9881039087157%
+Accuracy for 50 hidden units: 70.50254916241806%

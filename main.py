@@ -143,7 +143,7 @@ print('X_test_assess_minmax', X_test_assess_minmax)
 # print(finalResult[0][0])
 # print ('Accuracy %.2f' % float(finalResult) + '%')
 
-hidden_layer_sizes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 50]
+hidden_layer_sizes = [50]
 for i, n_h in enumerate(hidden_layer_sizes):
     parameters = nn_model(X_assess_minmax.T, Y_assess.T, n_h, num_iterations=5000, print_cost=True)
     predictions = predict(parameters, X_test_assess_minmax.T)
