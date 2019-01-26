@@ -105,7 +105,7 @@ def nn_model(X, Y, n_h, num_iterations = 10000, print_cost=False):
         A2, cache = forward_propagation(X, parameters)
         cost = compute_cost(A2, Y, parameters)
         grads = backward_propagation(parameters, cache, X, Y)
-        parameters = update_parameters(parameters, grads, learning_rate = 1.2)
+        parameters = update_parameters(parameters, grads, learning_rate = 0.005)
         if print_cost and i % 1000 == 0:
             print ("Cost after iteration %i: %f" %(i, cost))
     return parameters
@@ -143,13 +143,13 @@ print('X_test_assess_minmax', X_test_assess_minmax)
 # print(finalResult[0][0])
 # print ('Accuracy %.2f' % float(finalResult) + '%')
 
-hidden_layer_sizes = [50]
+hidden_layer_sizes = [10, 20, 30, 40, 50]
 for i, n_h in enumerate(hidden_layer_sizes):
     parameters = nn_model(X_assess_minmax.T, Y_assess.T, n_h, num_iterations=5000, print_cost=True)
     predictions = predict(parameters, X_test_assess_minmax.T)
     accuracy = float((np.dot(Y_test_assess.T, predictions.T) + np.dot((1-Y_test_assess).T,(1-predictions).T))/float(Y_test_assess.size)*100)
     print ("Accuracy for {} hidden units: {}%".format(n_h, accuracy))
-    fo = open("result2.txt",  mode='a')
+    fo = open("result-sigmoid&sigmoid-leran-rate0005-nh10-20-30-40-50.txt",  mode='a')
     str = "Accuracy for {} hidden units: {}%".format(n_h, accuracy)
     fo.write( str )
     fo.write('\n')

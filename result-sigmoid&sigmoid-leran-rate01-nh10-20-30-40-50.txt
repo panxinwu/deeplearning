@@ -1,0 +1,5 @@
+Accuracy for 10 hidden units: 69.16727361009953%
+Accuracy for 20 hidden units: 70.33260500121389%
+Accuracy for 30 hidden units: 69.22796795338675%
+Accuracy for 40 hidden units: 69.19155134741443%
+Accuracy for 50 hidden units: 70.12624423403739%

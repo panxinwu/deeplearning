@@ -49,3 +49,4 @@ Accuracy for 47 hidden units: 68.51177470259772%
 Accuracy for 48 hidden units: 70.17479970866715%
 Accuracy for 49 hidden units: 70.9881039087157%
 Accuracy for 50 hidden units: 70.50254916241806%
+Accuracy for 20 hidden units: 70.74532653556689%
